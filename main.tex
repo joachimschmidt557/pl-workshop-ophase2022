@@ -1,0 +1,121 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}
+
+\usetheme{metropolis}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{Speed-Dating Programming Languages}
+\author{Joachim Schmidt}
+\date{13. Oktober 2022}
+
+\begin{document}
+
+%\frame{\titlepage}
+
+\begin{frame}{}
+  \tableofcontents
+\end{frame}
+
+\section{Python}
+
+\begin{frame}{}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{python-logo-generic.png}
+    \caption{\cite{python_logo}}
+    \label{fig:python_logo}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Die Python Programmiersprache}
+  \begin{itemize}
+  \item interpretiert
+  \item dynamisch typisiert
+  \item große Auswahl an wissenschaftlichen Bibliotheken
+  \end{itemize}
+\end{frame}
+
+\section{Java}
+
+\begin{frame}{}
+  \begin{figure}
+    \centering
+    \includegraphics[height=0.8\textheight]{Java_programming_language_logo.png}
+    \caption{\cite{java_logo}}
+    \label{fig:java_logo}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Die Java Programmiersprache}
+  \begin{itemize}
+  \item objekt-orientiert
+  \item läuft in einer virtuellen Maschine (JVM)
+  \end{itemize}
+\end{frame}
+
+\section{Zig}
+
+\begin{frame}{}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{zig-logo-dark.png}
+    \caption{\cite{zig_logo}}
+    \label{fig:zig_logo}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Die Zig Programmiersprache}
+  \begin{itemize}
+  \item statisch typisiert
+  \item low-level / manuelles Speichermanagement
+  \item Ausführung von Code zur Kompilierzeit
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hello World}
+  \inputminted[linenos]{zig}{examples/hello.zig}
+\end{frame}
+
+\begin{frame}{Quellen}
+  \begin{thebibliography}{}
+  \bibitem{python_logo}
+    \url{https://www.python.org/static/community_logos/python-logo-generic.svg}
+
+  \bibitem{zig_logo}
+    \url{https://github.com/ziglang/logo/raw/master/zig-logo-dark.svg}
+
+  \end{thebibliography}
+\end{frame}
+
+\end{document}
