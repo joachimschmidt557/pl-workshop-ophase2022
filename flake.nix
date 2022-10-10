@@ -10,7 +10,12 @@
       let pkgs = nixpkgs.legacyPackages.${system}; in {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            tectonic
+            (texlive.combine {
+              inherit (texlive) scheme-medium minted fvextra upquote catchfile xstring framed beamertheme-metropolis pgfopts;
+            })
+            inkscape
+            wget
+            # texlive.combined.scheme-medium
             (python3.withPackages (ps: with ps; [ pygments ]))
           ];
         };
