@@ -1,6 +1,11 @@
 main.pdf: main.tex zig-logo-dark.png python-logo-generic.png Java_programming_language_logo.png
 	latexmk -pdf -shell-escape main.tex
 
+watch: main.tex zig-logo-dark.png python-logo-generic.png Java_programming_language_logo.png
+	latexmk -pvc -pdf -shell-escape main.tex
+
+.PHONY: watch
+
 
 zig-logo-dark.png: zig-logo-dark.svg
 	inkscape zig-logo-dark.svg -w 1600 -h 560 --export-filename zig-logo-dark.png
