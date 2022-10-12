@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{minted}
+\usepackage{tikz}
 
 \usetheme{metropolis}
 
@@ -14,40 +15,40 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2
-}
-
-\lstset{style=mystyle}
-
 \title{Speed-Dating Programming Languages}
 \author{Joachim Schmidt}
 \date{13. Oktober 2022}
 
 \begin{document}
 
+% https://tex.stackexchange.com/questions/55806/mindmap-tikzpicture-in-beamer-reveal-step-by-step/55849#55849
+%
+% Keys to support piece-wise uncovering of elements in TikZ pictures:
+% \node[visible on=<2->](foo){Foo}
+% \node[visible on=<{2,4}>](bar){Bar}   % put braces around comma expressions
+%
+% Internally works by setting opacity=0 when invisible, which has the
+% adavantage (compared to \node<2->(foo){Foo} that the node is always there, hence
+% always consumes space plus that coordinate (foo) is always available.
+%
+% The actual command that implements the invisibility can be overriden
+% by altering the style invisible. For instance \tikzsset{invisible/.style={opacity=0.2}}
+% would dim the "invisible" parts. Alternatively, the color might be set to white, if the
+% output driver does not support transparencies (e.g., PS)
+%
+\tikzset{
+  invisible/.style={opacity=0},
+  visible on/.style={alt={#1{}{invisible}}},
+  alt/.code args={<#1>#2#3}{%
+    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+  },
+}
+
 %\frame{\titlepage}
 
-\begin{frame}{}
-  \tableofcontents
-\end{frame}
-
-\section{Python}
+%% \begin{frame}{}
+%%   \tableofcontents
+%% \end{frame}
 
 \begin{frame}{}
   \begin{figure}
@@ -75,10 +76,15 @@
 \end{frame}
 
 \begin{frame}{Nutzung in der scientific community}
-  \inputminted[linenos]{python}{examples/dynamic_typing.py}
+  \begin{tikzpicture}
+    \node[left=0.1\textwidth, below=0.1\textwidth, visible on=<2->] at (current page.north west)
+         { \includegraphics[width=0.3\textwidth]{NumPy_logo_2020.png} };
+    \node[left=0.6\textwidth, visible on=<3->] at (current page.north west)
+         { \includegraphics[width=0.2\textwidth]{scipy.png} };
+    \node[left=0.4\textwidth, above=-0.1\textwidth, visible on=<4->] at (current page.north west)
+         { \includegraphics[width=0.4\textwidth]{pytorch-logo-dark.png} };
+  \end{tikzpicture}
 \end{frame}
-
-\section{Java}
 
 \begin{frame}{}
   \begin{figure}
@@ -96,7 +102,34 @@
   \end{itemize}
 \end{frame}
 
-\section{Zig}
+\begin{frame}{}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{nim.png}
+    \caption{\cite{nim_logo}}
+    \label{fig:nim_logo}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Die Nim Programmiersprache}
+  \begin{itemize}
+  \item kompiliert zu Maschinencode
+  \item Python-ähnliche Syntax
+  \item Makros für Meta-Programmierung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hello World}
+  \inputminted[linenos]{nim}{examples/hello.nim}
+\end{frame}
+
+\begin{frame}{Syntax von Python und Pascal inspiriert}
+  \inputminted[linenos]{nim}{examples/syntax.nim}
+\end{frame}
+
+\begin{frame}{Metaprogrammierung mit Makros und Templates}
+  \inputminted[linenos]{nim}{examples/templates.nim}
+\end{frame}
 
 \begin{frame}{}
   \begin{figure}
@@ -119,6 +152,10 @@
   \inputminted[linenos]{zig}{examples/hello.zig}
 \end{frame}
 
+\begin{frame}{Manuelles Speichermanagement}
+  \inputminted[linenos]{zig}{examples/memory_management.zig}
+\end{frame}
+
 \begin{frame}{Ausführung von Code zur Kompilierzeit}
   \inputminted[linenos]{zig}{examples/comptime.zig}
 \end{frame}
@@ -133,6 +170,9 @@
 
   \bibitem{java_logo}
     \url{https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg}
+
+  \bibitem{nim_logo}
+    \url{https://raw.githubusercontent.com/nim-lang/assets/master/Art/logo-on-black.svg}
 
   \end{thebibliography}
 \end{frame}
